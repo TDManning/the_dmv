@@ -35,7 +35,7 @@ RSpec.describe Registrant do
     expect(@registrant_2.permit?).to eq false 
   end
 
-  it "is eligible to earn a permit" do
+  it "is eligible to earn a permit at any age" do
     expect(@registrant_2.earn_permit).to eq true
     expect(@registrant_2.permit?).to eq true
   end
