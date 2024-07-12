@@ -25,12 +25,13 @@ RSpec.describe Registrant do
     expect(@registrant_2.age).to eq(15)
   end
 
-  xit 'has an license data' do
-    expect(@registrant_1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
-    expect(@registrant_2.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
+  it "could have a permit" do
+    expect(@registrant_1.permit?).to eq true
+    expect(@registrant_2.permit?).to eq false
   end
 
-  xit "does not have a permit by default" do
-    expect(@registrant_2.permit?).to eq(false)
+  it 'has an license data' do
+    expect(@registrant_1.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
+    expect(@registrant_2.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
   end
 end
