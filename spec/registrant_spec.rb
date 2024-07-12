@@ -9,8 +9,8 @@ RSpec.describe Registrant do
 
   describe '#initialize' do
     it 'exists' do
-      expect(@registrant_1).to be_an_instance_of(Registrant)
-      expect(@registrant_2).to be_an_instance_of(Registrant)
+      expect(@registrant_1).to be_a(Registrant)
+      expect(@registrant_2).to be_a(Registrant)
     end
   end
 
