@@ -13,6 +13,5 @@ class Dmv
     @facilities.find_all do |facility| 
     facility.services.include?(service)
     end
-
   end
 end
