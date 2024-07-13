@@ -15,6 +15,5 @@ class Registrant
   def earn_permit
     @permit = @age >= 0
   end
-
 end
 
