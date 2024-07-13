@@ -35,11 +35,65 @@ RSpec.describe Facility do
 
   describe "#register_vehicle" do 
     it 'has a Vehicle Registration service' do 
-     expect(@cruz).to be_an_instance_of(Vehicle)
-     expect(@facility.add_service('Vehicle Registration')).to eq(["Vehicle Registration"])
-     expect(@facility.registered_vehicles).to eq([])
-     expect(@facility.collected_fees).to eq(0) 
-     expect(@cruz.registration_date).to be(nil)
+      expect(@cruz).to be_an_instance_of(Vehicle)
+      expect(@facility.add_service('Vehicle Registration')).to eq(["Vehicle Registration"])
+      expect(@facility.registered_vehicles).to eq([])
+      expect(@facility.collected_fees).to eq(0) 
+      expect(@cruz.registration_date).to be(nil)
+    end
+  end
+
+  describe "#register_vehicle cruz" do 
+    it 'can register a specific vehicle, regular type' do 
+      expect(@cruz).to be_an_instance_of(Vehicle)
+      expect(@cruz.plate_type).to eq(:regular)
+      expect(@facility.collected_fees).to eq(100) 
+      expect(@cruz.registration_date).to be(Date.today)
+    end
+  end
+
+  describe "#register_vehicle camaro" do 
+    it 'can register a specific vehicle, antique type' do 
+      expect(@camaro).to be_an_instance_of(Vehicle)
+      expect(@camaro.plate_type).to eq(:antique)
+      expect(@facility.collected_fees).to eq(25) 
+      expect(@camaro.registration_date).to be(Date.today)
+    end
+  end
+
+  describe "#register_vehicle bolt" do 
+    it 'can register a specific vehicle, ev type' do 
+      expect(bolt).to be_an_instance_of(Vehicle)
+      expect(@camaro.plate_type).to eq(:ev)
+      expect(@facility.collected_fees).to eq(200) 
+      expect(@camaro.registration_date).to be(Date.today)
+   end
+  end
+
+  describe "#compile data" do 
+    it 'can compile all registered vehicle data' do 
+      expect(@facility.registered_vehicles).to eq([array of all three vehicles])
+      expect(@facility.collected_fees).to eq(325) 
+   end
+  end
+
+  describe "#show other facilities" do 
+    it 'cannot register vehicles when the facility is not offering the service' do 
+      facility_2 = Facility.new({name: 'DMV Northeast Branch', address: '4685 Peoria Street Suite 101 Denver CO 80239', phone: '(720) 865-4600'})
+      expect(@facility_2.services).to eq([]) 
+      expect(@facility_2.register_vehicle(bolt)).to eq(nil) 
+      expect(@facility_2.registered_vehicles).to eq([])
+      expect(@facility.collected_fees).to eq(0)
     end
   end
 end
+
+# Next I will actually register cruz starting at:
+# @facility.register_vehicle(cruz)
+# cruz.registration_date
+# cruz.plate_type
+# facility_1.registered_vehicles -here we are checking that the vehicle is actually registered
+
+# facility_1.collected_fees -test to show hoe much $$ in fees has been collected so far
+
+#Repeat the process for the camaro and bolt
