@@ -99,22 +99,37 @@ RSpec.describe Facility do
     end
   end
 
-  xit "has previously taken a written test" do
-    expect(@facility.administer_written_test(@registrant_1)).to eq false
-    expect(@facility.administer_written_test(@registrant_2)).to eq false
-    expect(@facility.administer_written_test(@registrant_3)).to eq false
+  describe "#written test given previously" do 
+    it "has previously given a written test" do
+      expect(@facility.administer_written_test(@registrant_1)).to eq false
+      expect(@facility.administer_written_test(@registrant_2)).to eq false
+      expect(@facility.administer_written_test(@registrant_3)).to eq false
+    end
   end
 
-  xit "is eligible to take a written test" do
-    expect(@facility.administer_written_test(@registrant_1)).to eq true
-    expect(@facility.administer_written_test(@registrant_2)).to eq true
-    expect(@facility.administer_written_test(@registrant_3)).to eq false
+  describe "#written test given" do 
+    it "will give a written test to someone 16 years and older" do
+      @facility.add_service('Written Test')
+      @facility.administer_written_test(@registrant_1)
+      @facility.administer_written_test(@registrant_2)
+      @facility.administer_written_test(@registrant_3)
+      expect(@facility.administer_written_test(@registrant_1)).to eq true
+      expect(@facility.administer_written_test(@registrant_2)).to eq true
+      expect(@facility.administer_written_test(@registrant_3)).to eq false
+    end
   end
 
-
-  xit 'has updated license data' do
-    expect(@registrant_1.license_data).to eq({:license=>false, :renewed=>false, :written=>true})
-    expect(@registrant_2.license_data).to eq({:license=>false, :renewed=>false, :written=>true})
-    expect(@registrant_3.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
+  describe "#updated written test" do 
+    xit 'has updated written test license data' do
+      @facility.add_service('Written Test')
+      @facility.administer_written_test(@registrant_1)
+      @facility.administer_written_test(@registrant_2)
+      @facility.administer_written_test(@registrant_3)
+      @facility.add_service('Renew Drivers License')
+      expect(@facility.add_service('Renew Drivers License')).to eq(["Renew Drivers License"])
+      expect(@registrant_1.license_data).to eq({:license=>false, :renewed=>false, :written=>true})
+      expect(@registrant_2.license_data).to eq({:license=>false, :renewed=>false, :written=>true})
+      expect(@registrant_3.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
+    end
   end
 end
