@@ -16,6 +16,7 @@ RSpec.describe Registrant do
     expect(@registrant_1).to be_an_instance_of(Registrant)
     expect(@registrant_2).to be_an_instance_of(Registrant)
     expect(@registrant_3).to be_an_instance_of(Registrant)
+    # expect(@registrant).to be_an_instance_of(Registrant)
   end
   end
 
