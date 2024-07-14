@@ -1,14 +1,15 @@
 class Facility
   attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles, :registration_date
+  attr_accessor :license_data
 
   def initialize(facility_hash)
-    # @facility
     @name = facility_hash[:name]
     @address = facility_hash[:address]
     @phone = facility_hash[:phone]
     @services = []
     @collected_fees = 0
     @registered_vehicles = []
+    @license_data = license_data
   end
 
   def add_service(service)
@@ -21,8 +22,6 @@ class Facility
       vehicle.registration_date = Date.today
       collect_fees(vehicle)
       @registered_vehicles
-    else
-      nil
     end
   end 
 
@@ -35,5 +34,10 @@ class Facility
       @collected_fees += 100
     end 
   end 
-end
 
+  def administer_written_test(registrant)
+    if @services.include?("Written Test") && registrant.permit? && registrant.age >= 16
+      registrant.license_data[:written] = true
+    end
+  end
+end
