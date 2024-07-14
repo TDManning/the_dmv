@@ -1,5 +1,5 @@
 class Facility
-  attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles
+  attr_reader :name, :address, :phone, :services, :collected_fees, :registered_vehicles, :registration_date
 
   def initialize(facility_hash)
     # @facility
@@ -15,17 +15,10 @@ class Facility
     @services << service
   end
 
-  # def register_vehicle(vehicle)
-  #   if @services.include?("Vehicle Registration")
-  #     @registered_vehicles << vehicle
-  #   end
-  #   collect_fees(vehicle)
-  # end
-
   def register_vehicle(vehicle)
     if @services.include?("Vehicle Registration") 
       @registered_vehicles << vehicle 
-      vehicle.registration_date
+      vehicle.registration_date = Date.today
       collect_fees(vehicle)
       @registered_vehicles
     else
@@ -41,15 +34,6 @@ class Facility
     else
       @collected_fees += 100
     end 
-  end
-
-  def registration_date
-    nil 
-    if @facility.add_service = ["Vehicle Registration"]
-    @registration_date = Date.today.year
-    end
-  end
-  
+  end 
 end
-
 
