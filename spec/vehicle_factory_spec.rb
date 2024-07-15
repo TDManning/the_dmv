@@ -6,14 +6,19 @@ end
 
 RSpec.describe VehicleFactory do
   before(:each) do
-    @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
     @factory = VehicleFactory.new
+    @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
+  end
+
+  describe '#initialize' do
+    it 'can initialize' do
+    expect(@factory).to be_an_instance_of(VehicleFactory)
+    end
   end
   
   describe '#create_vehicle' do
     it 'can pull data from the DMV Data Service' do
-      factory = @factory.create_vehicles(@wa_ev_registrations)
-      expect(@factory).to be_an_instance_of(VehicleFactory)
+    expect(@factory.create_vehicles(@wa_ev_registrations)).to be_an_instance_of(Array)
     end
   end
 end
