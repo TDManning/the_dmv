@@ -11,11 +11,11 @@ class VehicleFactory
     registrations.map do |registration|
       specific_vehicle = {
         engine: :ev, 
-        vin: registration[:vin_1_10], 
-        year: registration[:model_year], 
         make: registration[:make],
-        model: registration[:model], 
-        engine:  :ev}
+        model: registration[:model],
+        registration_date: nil,
+        vin: registration[:vin_1_10], 
+        year: registration[:model_year]}
 
     vehicle = Vehicle.new(specific_vehicle)
     created_vehicles << vehicle
