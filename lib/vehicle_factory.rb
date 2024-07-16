@@ -15,7 +15,8 @@ class VehicleFactory
         model: registration[:model],
         registration_date: nil,
         vin: registration[:vin_1_10], 
-        year: registration[:model_year]}
+        year: registration[:model_year]
+      }
 
     vehicle = Vehicle.new(specific_vehicle)
     created_vehicles << vehicle
